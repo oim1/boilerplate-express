@@ -4,6 +4,19 @@ require('dotenv').config();
 
 console.log("Hello World");
 
+app.use(function middleware(req, res, next){
+ console.log(`${req.method} ${req.path} - ${req.ip}`);
+ next();
+})
+
+app.get('/now', function(req, res, next) {
+ req.time = new Date().toString();
+ next();
+}, function(req, res) {
+ let timeJSON = {"time": `${req.time}`}
+ res.json(timeJSON);
+})
+
 app.get("/", function(req,res){
  let absolutePath = __dirname + "/views/index.html";
  res.sendFile(absolutePath);
@@ -22,7 +35,6 @@ app.get("/json", function(req,res){
  }
  res.jsonp(myJSON);
 })
-
 
 
 
