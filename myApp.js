@@ -8,6 +8,11 @@ app.get("/", function(req,res){
  res.sendFile(absolutePath);
 });
 
+let cssPath = __dirname + "/public";
+
+app.use("/public", express.static(cssPath));
+
+
 
 
 
