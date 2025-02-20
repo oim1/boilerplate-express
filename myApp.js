@@ -14,6 +14,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.use(bodyParser.json());
 
+app.post('/name',(req,res) => {
+ let name = `${req.body.first} ${req.body.last}`;
+ res.jsonp({"name": name});
+});
+
 app.get('/now', function(req, res, next) {
  req.time = new Date().toString();
  next();
