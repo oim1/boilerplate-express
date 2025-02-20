@@ -22,6 +22,20 @@ app.get("/", function(req,res){
  res.sendFile(absolutePath);
 });
 
+app.get('/:word/echo', function(req, res) {
+ let wordJSON = {"echo": `${req.params.word}`};
+ res.jsonp(wordJSON);
+});
+
+app.get('/name', function(req, res) {
+ let { first: firstName, last: lastName } = req.query;
+
+ let nameJSON = {"name": `${firstName} ${lastName}`};
+
+ res.jsonp(nameJSON);
+});
+
+
 let cssPath = __dirname + "/public";
 
 app.use("/public", express.static(cssPath));
